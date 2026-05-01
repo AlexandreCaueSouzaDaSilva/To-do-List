@@ -23,7 +23,7 @@ function App() {
 
 
   <div className="container-tarefas">
-  <button>Marcar todas como concluídas</button>
+  <button>Editar Tarefas</button> <button>Limpar Tudo</button>
 
   <h2>Tarefas</h2>
 

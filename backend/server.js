@@ -1,17 +1,23 @@
 const express = require('express');
 const cors = require('cors');
+// Importando as rotas de tarefas
+const tarefasRoutes = require('./routes/tarefas');
 
 const app = express();
-const PORT = 3000;
+const PORT = 3000; // minha ports
 
 // Middleware para permitir requisições de diferentes origens (CORS) e para analisar o corpo das requisições como JSON
 app.use(cors());
 app.use(express.json()); // Para analisar o corpo das requisições como JSON por padrão 
 
-// Rota de teste para verificar a conexão entre o front-end e o back-end ( pra n me perder por hora)
+app.use('/tarefas', tarefasRoutes); // Usando as rotas de tarefas para qualquer requisição que comece com /tarefas
+
+
+
 app.get('/', (req, res) => {
-    res.send(["te escuto..."]) // testando pela primeira vez a conexão entre o front e o back, depois vou substituir por uma resposta mais adequada
-})
+    res.json({ message: "API ta funcionando!" }); // api
+});
+
 
 // Runner do Server 
 app.listen(PORT, (err) => {
