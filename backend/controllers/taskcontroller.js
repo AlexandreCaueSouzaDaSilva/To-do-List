@@ -31,9 +31,39 @@ function createTarefa(req, res) {
 }
 
 
-function updateTarefa(req, res) {} // falta implementar
+function updateTarefa(req, res) {
 
-function deleteTarefa(req, res) {} // Falta implementar
+const id = Number(req.params.id);
+
+const {concluido} = req.body;
+
+const tarefa = tarefas.find((item) => item.id === id)
+
+if (!tarefa) {
+  return res.status(404).json({
+    error: "Tarefa não encontrada."
+  });
+
+tarefa.concluido = concluido;
+res.status(200).json(tarefa);
+}}
+
+// Ainda ta faltando
+function deleteTarefa(req, res) {
+
+const id = Number(req.params.id);
+const index = tarefas.findIndex((item) => item.id === id);
+
+if (index === -1) {
+  return res.status(404).json({
+    error: "Tarefa não encontrada."
+  });
+
+
+
+
+}
+};
 
 module.exports = {
   getTarefa,

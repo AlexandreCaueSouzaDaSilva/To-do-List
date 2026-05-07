@@ -28,6 +28,19 @@ function App() {
     getTasks();
   }
 
+  async function updateTask(id, statusAtual) {
+    await fetch(`http://localhost:3000/tarefas/${id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        concluido: !statusAtual
+      })
+    });
+  }
+
+
   useEffect(() => {
     getTasks();
   }, []);
