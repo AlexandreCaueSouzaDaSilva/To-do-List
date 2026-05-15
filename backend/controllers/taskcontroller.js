@@ -2,14 +2,14 @@ let tarefas = []; // array em memória (sem banco de dados)
 
 let identificador = 1; // identificador unico
 
-function getTarefa(req, res) {
+function getTarefa(req, res) { // Get
   res.status(200).json(tarefas);
 }
 
 
 
 
-function createTarefa(req, res) {
+function createTarefa(req, res) { // Post
   const { titulo } = req.body;
 
   if (!titulo || titulo.trim() === "") {
@@ -31,7 +31,8 @@ function createTarefa(req, res) {
 }
 
 
-function updateTarefa(req, res) {
+//corrigi a chave
+function updateTarefa(req, res) { // Put
 
 const id = Number(req.params.id);
 
@@ -43,25 +44,32 @@ if (!tarefa) {
   return res.status(404).json({
     error: "Tarefa não encontrada."
   });
+}
 
 tarefa.concluido = concluido;
 res.status(200).json(tarefa);
-}}
+}
+
+
+
+
+
 
 // Ainda ta faltando
-function deleteTarefa(req, res) {
+function deleteTarefa(req, res) { // Delete
 
 const id = Number(req.params.id);
-const index = tarefas.findIndex((item) => item.id === id);
+const index = tarefas.findIndex((item) => item.id === id); // procura o índice da tarefa com o id fornecido
 
 if (index === -1) {
   return res.status(404).json({
     error: "Tarefa não encontrada."
   });
 
-
-
-
+tarefas.splice(index, 1); // aqui é onde a tarefa é removida do array
+res.status(204).send(); // 204 No Content, pois não há conteúdo para retornar após a exclusão
+res.status(200).json({
+  message: "Tarefa deletada com sucesso."})
 }
 };
 

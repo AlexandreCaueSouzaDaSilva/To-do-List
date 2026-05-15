@@ -7,13 +7,13 @@ function App() {
   const [task, setTask] = useState("");
   const [tasks, setTasks] = useState([]);
 
-  async function getTasks() {
+  async function getTarefa() {
     const response = await fetch("http://localhost:3000/tarefas"); // Fazendo uma requisição GET para obter as tarefas do backend
     const data = await response.json(); // Convertendo a resposta para JSON
     setTasks(data);
   }
 
-  async function addTask() {
+  async function addTarefa() {
     await fetch("http://localhost:3000/tarefas", {
       method: "POST",
       headers: {
@@ -25,10 +25,10 @@ function App() {
     });
 
     setTask("");
-    getTasks();
+    getTarefa();
   }
 
-  async function updateTask(id, statusAtual) {
+  async function updateTarefa(id, statusAtual) {
     await fetch(`http://localhost:3000/tarefas/${id}`, {
       method: "PUT",
       headers: {
@@ -38,11 +38,13 @@ function App() {
         concluido: !statusAtual
       })
     });
+
+    getTarefa();
   }
 
 
   useEffect(() => {
-    getTasks();
+    getTarefa();
   }, []);
 
 
@@ -59,7 +61,7 @@ function App() {
        value={task}
        onChange={(e) => setTask(e.target.value)}
        />
-       <button onClick={addTask}>Adicionar</button>
+       <button onClick={addTarefa}>Adicionar</button>
     </div>
 
 
@@ -82,7 +84,16 @@ function App() {
         {tasks.map((item) => (
           <tr key={item.id}>
             <td>
-              <input type="checkbox" /> {item.titulo}
+              <input 
+              type="checkbox"
+              checked={item.concluido}
+              onChange={() => updateTarefa(item.id, item.concluido)}
+              />
+              
+              <span style={{ textDecoration: item.concluido ? 'line-through' : 'none' }}>
+                {item.titulo}
+              </span>
+
             </td>
           </tr>
         ))}
