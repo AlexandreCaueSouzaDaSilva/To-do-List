@@ -14,6 +14,11 @@ function App() {
   }
 
   async function addTarefa() {
+
+    if (task.trim() === "") {
+      alert("Por favor, insira uma tarefa válida.");
+      return;
+    }
     await fetch("http://localhost:3000/tarefas", {
       method: "POST",
       headers: {
@@ -60,6 +65,10 @@ function App() {
        placeholder="Adicione uma tarefa" 
        value={task}
        onChange={(e) => setTask(e.target.value)}
+       onKeyDown={(e) => {
+        if (e.key === "Enter") {
+          addTarefa(); }
+       }}
        />
        <button onClick={addTarefa}>Adicionar</button>
     </div>
@@ -79,7 +88,7 @@ function App() {
   <h2>Tarefas</h2>
 
 
-    <table border={1}>
+    <table>
       <tbody>
         {tasks.map((item) => (
           <tr key={item.id}>
