@@ -71,3 +71,9 @@ h1, h2 {
 table {
   border: 1px solid black;
 }
+
+#tarefas {
+ color: black;
+/* espacamento cima e baio*/
+ margin: 20px 0;
+}

@@ -48,10 +48,21 @@ function App() {
   }
 
 
+
+async function deleteTarefa(id) {
+  await fetch(`http://localhost:3000/tarefas/${id}`, {
+    method: "DELETE"
+  });
+  getTarefa();
+}
+
+
+
+
+  // useEffect para carregar as tarefas quando tiver a primeira renderização do componente
   useEffect(() => {
     getTarefa();
   }, []);
-
 
 //* To Do List
   return(
@@ -75,8 +86,6 @@ function App() {
 
 
     <div>
-      <button>Limpar</button>
-      <button>Excluir tarefa</button>
       <button>Marcar todas como concluídas</button>
     </div>
   </div>
@@ -85,7 +94,7 @@ function App() {
   <div className="container-tarefas">
   <button>Editar Tarefas</button> <button>Limpar Tudo</button>
 
-  <h2>Tarefas</h2>
+  <h2 id="tarefas">Tarefas</h2>
 
 
     <table>
@@ -102,6 +111,10 @@ function App() {
               <span style={{ textDecoration: item.concluido ? 'line-through' : 'none' }}>
                 {item.titulo}
               </span>
+
+              <button onClick={() => deleteTarefa(item.id)}>
+                Excluir
+              </button>
 
             </td>
           </tr>

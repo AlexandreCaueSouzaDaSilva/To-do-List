@@ -55,7 +55,7 @@ res.status(200).json(tarefa);
 
 
 
-// Ainda ta faltando
+// na proxima commit resolver o return, ta dulplicando e nao vai retornar o status
 function deleteTarefa(req, res) { // Delete
 
 const id = Number(req.params.id);
@@ -70,6 +70,14 @@ tarefas.splice(index, 1); // aqui é onde a tarefa é removida do array
 res.status(204).send(); // 204 No Content, pois não há conteúdo para retornar após a exclusão
 res.status(200).json({
   message: "Tarefa deletada com sucesso."})
+
+
+tarefas.splice(index, 1); // aqui é onde a tarefa é removida do array
+res.status(204).send(); // 204 No Content, pois não há conteúdo para retornar após a exclusão
+
+res.status(200).json({
+  message: "Tarefa deletada com sucesso."})
+
 }
 };
 
