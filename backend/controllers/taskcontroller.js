@@ -55,31 +55,26 @@ res.status(200).json(tarefa);
 
 
 
-// na proxima commit resolver o return, ta dulplicando e nao vai retornar o status
+// corrigi a chave
 function deleteTarefa(req, res) { // Delete
 
 const id = Number(req.params.id);
 const index = tarefas.findIndex((item) => item.id === id); // procura o índice da tarefa com o id fornecido
 
 if (index === -1) {
-  return res.status(404).json({
+    return res.status(404).json({
     error: "Tarefa não encontrada."
-  });
+});
+}
 
+// corrigi, estava duplicado sem necessidade
 tarefas.splice(index, 1); // aqui é onde a tarefa é removida do array
-res.status(204).send(); // 204 No Content, pois não há conteúdo para retornar após a exclusão
+
+// So pode retornar um status
 res.status(200).json({
-  message: "Tarefa deletada com sucesso."})
-
-
-tarefas.splice(index, 1); // aqui é onde a tarefa é removida do array
-res.status(204).send(); // 204 No Content, pois não há conteúdo para retornar após a exclusão
-
-res.status(200).json({
-  message: "Tarefa deletada com sucesso."})
+  message: "Tarefa deletada com sucesso."});
 
 }
-};
 
 module.exports = {
   getTarefa,
