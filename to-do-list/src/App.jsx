@@ -56,40 +56,55 @@ async function deleteTarefa(id) {
   getTarefa();
 }
 
-
-
-
   // useEffect para carregar as tarefas quando tiver a primeira renderização do componente
   useEffect(() => {
     getTarefa();
   }, []);
 
+
+
+
+
 //* To Do List
   return(
 <div className="App">
-  <h1>To Do List</h1>
-
+<div className="container-input">
   <div className="input-container">
+
     <div className="agrupado-inputs">
-       <input 
-       type="text" 
-       placeholder="Adicione uma tarefa" 
-       value={task}
-       onChange={(e) => setTask(e.target.value)}
-       onKeyDown={(e) => {
-        if (e.key === "Enter") {
-          addTarefa(); }
-       }}
-       />
-       <button onClick={addTarefa}>Adicionar</button>
+      <input 
+        type="text" 
+        placeholder="Adicione uma tarefa" 
+        value={task}
+        onChange={(e) => setTask(e.target.value)}
+        onKeyDown={(e) => {
+          if (e.key === "Enter") {
+            addTarefa();
+          }
+        }}
+      />
+
+      <button onClick={addTarefa}>
+        Adicionar
+      </button>
     </div>
 
+    <div className="Card-contagem">
+      <span>Total de tarefas: {tasks.length}</span>
+
+      <span>
+        Concluídas: {
+          tasks.filter((item) => item.concluido).length
+        }
+      </span>
+    </div>
 
     <div>
       <button>Marcar todas como concluídas</button>
     </div>
-  </div>
 
+  </div>
+</div>
 
   <div className="container-tarefas">
   <button>Editar Tarefas</button> <button>Limpar Tudo</button>

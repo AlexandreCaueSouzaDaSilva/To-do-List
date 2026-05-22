@@ -27,33 +27,71 @@ h1, h2 {
 
 /* Campo de Cima*/
 .input-container {
-  margin: 20px;
+  margin: 19px;
   border: 1px solid #000000;
   border-radius: 6px;
-  padding: 15px;
+  padding: 20px;
   width: 400px;
 
   display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 10px;
+  flex-direction: column;
+  gap: 15px;
+
   background-color: white;
 }
 
-.input-container input {
-  flex: 1;
-  padding: 8px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  text-align: left;
-}
-
+/* Estilo do botão, criar espaçamento */
 .input-container button {
-  padding: 8px 12px;
+  padding: 11px 12px;
   border: none;
   border-radius: 5px;
   cursor: pointer;
+
+  transition: 0.2s;
 }
+
+/* Hover bonito */
+.input-container button:hover {
+  opacity: 0.8;
+}
+
+/* Agrupamento do input + botão */
+.agrupado-inputs {
+  padding: 10px;
+
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+/* Input */
+.agrupado-inputs input {
+  flex: 1;
+
+  padding: 11px;
+
+  border: 1px solid #ccc;
+  border-radius: 5px;
+
+  outline: none;
+}
+
+
+
+/* Campo de contagem */
+.Card-contagem {
+  margin: 12px;
+  border: 1px solid #000000;
+  border-radius: 6px;
+  padding: 10px;
+
+
+  display: flex; /* para colocar os itens em linha */
+  justify-content: space-between; /* para colocar os itens nas extremidades */
+  align-items: center;
+  background-color: white;
+}
+
 
 /* Campo de Tarefas ou Campo de Baixo*/
 .container-tarefas {
