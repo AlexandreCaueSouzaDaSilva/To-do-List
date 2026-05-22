@@ -56,6 +56,45 @@ async function deleteTarefa(id) {
   getTarefa();
 }
 
+// Funcionalidade de marcar todas como concluídas
+async function concluirTodas() {
+
+  await Promise.all(
+
+    tasks.map((item) => {
+
+      return fetch(`http://localhost:3000/tarefas/${item.id}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          concluido: true
+        })
+      });
+
+    })
+
+  );
+
+  getTarefa();
+}
+
+// Funcionalidade de limpar todas as tarefas
+async function deletarTudo() {
+
+  await Promise.all(
+    tasks.map((item) => {
+      return fetch(`http://localhost:3000/tarefas/${item.id}`, {
+        method: "DELETE"
+      });
+    })
+  );
+  getTarefa();
+  }
+
+
+
   // useEffect para carregar as tarefas quando tiver a primeira renderização do componente
   useEffect(() => {
     getTarefa();
@@ -99,15 +138,20 @@ async function deleteTarefa(id) {
       </span>
     </div>
 
-    <div>
-      <button>Marcar todas como concluídas</button>
+    <div className="Card-marcar-todas">
+      <button onClick={concluirTodas}>
+        Marcar todas como concluídas
+      </button>
     </div>
 
   </div>
 </div>
 
   <div className="container-tarefas">
-  <button>Editar Tarefas</button> <button>Limpar Tudo</button>
+  
+  <button onClick={deletarTudo}>
+    Limpar Tudo
+  </button>
 
   <h2 id="tarefas">Tarefas</h2>
 
